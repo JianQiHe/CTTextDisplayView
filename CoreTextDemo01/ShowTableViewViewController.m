@@ -45,7 +45,7 @@
 - (void)initData{
     self.rowHeightArray = [NSMutableArray new];
     self.dataArray = [NSMutableArray new];
-    NSString * text = @"${李四} 回复 ${王麻子}[拜拜]视]我@{张三:12}自[鄙www.baidu.com[拜拜][悲伤]视]横[悲伤]刀[拜拜]向天笑[拜拜]，@{去留肝胆两昆}仑。--谭嗣同同学你好啊。This is my first CoreText #{周杰伦:23} https://www.google.com/ demo,how are you ?I [拜拜] love three thi \ue056 n[拜拜]gs,the sun,the moon,and you.the sun for the day,themoon for the night,and you forever.去[拜拜]年今年今年今@{张三人asdf面桃花}相映红人面桃花相映红日此门中，人面桃花相映红。头，有恨无人省。捡尽寒枝不肯栖，寂寞沙洲冷。[拜拜]独往来[鄙视][悲伤],.说愁";
+    NSString * text = @"${李四} 回复 ${王麻子}[拜拜]视]我@{张三:12}自[鄙www.baidu.com[拜拜][悲伤]视]横[悲伤]刀[拜拜]向天笑[拜拜]，@{去留肝胆两昆}仑。This is my first CoreText #{周杰伦:23} https://www.google.com/ demo,how are you ?I [拜拜] love three thi \ue056 n[拜拜]gs,the sun,the moon,and you.the sun for the day,themoon for the night,and you forever.去[拜拜]年今年今年今@{张三人asdf面桃花}相映红人面桃花相映红日此门中，人面桃花相映红。头，有恨无人省。捡尽寒枝不肯栖，寂寞沙洲冷。[拜拜]独往来[鄙视][悲伤],.说愁";
     UIFont * font = [UIFont systemFontOfSize:16];
     CGSize faceSize = CGSizeMake(25, 25);
     CGFloat lineSpace = 5.0f;
