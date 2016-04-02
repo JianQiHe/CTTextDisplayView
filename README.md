@@ -23,9 +23,13 @@ CTTextDisplayView 是一个CoreText完成的图文混排视图，主要用于文
   代码:${张三} 回复 ${李四:id}
 
 
-********************* 注意: 此代码只作参考，不建议直接使用于实际项目中 ********************
-
+********************* 注意: 此代码只作学习参考，不建议直接使用于实际项目中 ********************
+********************* e-mail: 347991555@qq.com                 *********************
 
 ![image](https://github.com/BrownCN023/CTTextDisplayView/blob/master/Simulator%20Screen%20Shot%202016%E5%B9%B44%E6%9C%882%E6%97%A5%20%E4%B8%8B%E5%8D%885.30.39.png)
 
 ![image](https://github.com/BrownCN023/CTTextDisplayView/blob/master/Simulator%20Screen%20Shot%202016%E5%B9%B44%E6%9C%882%E6%97%A5%20%E4%B8%8B%E5%8D%885.30.43.png)
+
+
+
+
