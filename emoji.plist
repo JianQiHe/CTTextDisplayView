@@ -3,10 +3,10 @@
 <plist version="1.0">
 <dict>
 	<key>[拜拜]</key>
-	<string>d_baibai</string>
+	<string>d_baibai.png</string>
 	<key>[悲伤]</key>
-	<string>d_beishang</string>
+	<string>d_beishang.png</string>
 	<key>[鄙视]</key>
-	<string>d_bishi</string>
+	<string>d_bishi.png</string>
 </dict>
 </plist>
