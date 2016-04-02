@@ -25,7 +25,9 @@
 
 ********************* e-mail: 347991555@qq.com                 ********************
 
+#![image](https://github.com/BrownCN023/CTTextDisplayView/blob/master/Simulator%20Screen%20Shot%202016%E5%B9%B44%E6%9C%883%E6%97%A5%20%E4%B8%8A%E5%8D%881.34.07.png)
 
+#![image](https://github.com/BrownCN023/CTTextDisplayView/blob/master/Simulator%20Screen%20Shot%202016%E5%B9%B44%E6%9C%883%E6%97%A5%20%E4%B8%8A%E5%8D%881.34.15.png)
 
 
 
