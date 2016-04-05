@@ -12,7 +12,6 @@
 		18934B8E1CB38A5300790E13 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18934B8D1CB38A5300790E13 /* ViewController.m */; };
 		18934B931CB38A5300790E13 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18934B921CB38A5300790E13 /* Assets.xcassets */; };
 		18934B961CB38A5300790E13 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18934B941CB38A5300790E13 /* LaunchScreen.storyboard */; };
-		18934B9F1CB38A6200790E13 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18934B9E1CB38A6200790E13 /* Main.storyboard */; };
 		18934BA71CB38A7400790E13 /* CTTextDisplayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18934BA21CB38A7400790E13 /* CTTextDisplayView.m */; };
 		18934BA81CB38A7400790E13 /* CTTextEmojiUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 18934BA41CB38A7400790E13 /* CTTextEmojiUtil.m */; };
 		18934BA91CB38A7400790E13 /* CTTextRun.m in Sources */ = {isa = PBXBuildFile; fileRef = 18934BA61CB38A7400790E13 /* CTTextRun.m */; };
@@ -67,6 +66,7 @@
 		18934C6E1CB38BC300790E13 /* d_landelini@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 18934C3F1CB38BC300790E13 /* d_landelini@2x.png */; };
 		18934C6F1CB38BC300790E13 /* d_landelini@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 18934C401CB38BC300790E13 /* d_landelini@3x.png */; };
 		18934C721CB38E3100790E13 /* CTTextStyleModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18934C711CB38E3100790E13 /* CTTextStyleModel.m */; };
+		C06D594C1CB3E9C7004C41EE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C06D594B1CB3E9C7004C41EE /* Main.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -79,7 +79,6 @@
 		18934B921CB38A5300790E13 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		18934B951CB38A5300790E13 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		18934B971CB38A5300790E13 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		18934B9D1CB38A6200790E13 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		18934BA11CB38A7400790E13 /* CTTextDisplayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTTextDisplayView.h; sourceTree = "<group>"; };
 		18934BA21CB38A7400790E13 /* CTTextDisplayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTTextDisplayView.m; sourceTree = "<group>"; };
 		18934BA31CB38A7400790E13 /* CTTextEmojiUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTTextEmojiUtil.h; sourceTree = "<group>"; };
@@ -140,6 +139,7 @@
 		18934C401CB38BC300790E13 /* d_landelini@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "d_landelini@3x.png"; sourceTree = "<group>"; };
 		18934C701CB38E3100790E13 /* CTTextStyleModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTTextStyleModel.h; sourceTree = "<group>"; };
 		18934C711CB38E3100790E13 /* CTTextStyleModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTTextStyleModel.m; sourceTree = "<group>"; };
+		C06D594B1CB3E9C7004C41EE /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -181,7 +181,7 @@
 				18934B8A1CB38A5300790E13 /* AppDelegate.m */,
 				18934B8C1CB38A5300790E13 /* ViewController.h */,
 				18934B8D1CB38A5300790E13 /* ViewController.m */,
-				18934B9E1CB38A6200790E13 /* Main.storyboard */,
+				C06D594B1CB3E9C7004C41EE /* Main.storyboard */,
 				18934B921CB38A5300790E13 /* Assets.xcassets */,
 				18934B941CB38A5300790E13 /* LaunchScreen.storyboard */,
 				18934B971CB38A5300790E13 /* Info.plist */,
@@ -332,6 +332,7 @@
 				18934C4A1CB38BC300790E13 /* d_bizui@3x.png in Resources */,
 				18934C611CB38BC300790E13 /* d_heng@3x.png in Resources */,
 				18934C6B1CB38BC300790E13 /* d_ku@3x.png in Resources */,
+				C06D594C1CB3E9C7004C41EE /* Main.storyboard in Resources */,
 				18934C621CB38BC300790E13 /* d_huaxin@2x.png in Resources */,
 				18934C601CB38BC300790E13 /* d_heng@2x.png in Resources */,
 				18934C581CB38BC300790E13 /* d_haixiu@2x.png in Resources */,
@@ -346,7 +347,6 @@
 				18934C481CB38BC300790E13 /* d_bishi@3x.png in Resources */,
 				18934C671CB38BC300790E13 /* d_keai@3x.png in Resources */,
 				18934C531CB38BC300790E13 /* d_ganmao@2x.png in Resources */,
-				18934B9F1CB38A6200790E13 /* Main.storyboard in Resources */,
 				18934C431CB38BC300790E13 /* d_baibai@2x.png in Resources */,
 				18934C641CB38BC300790E13 /* d_jiyan@2x.png in Resources */,
 				18934C4D1CB38BC300790E13 /* d_chijing@2x.png in Resources */,
@@ -408,15 +408,6 @@
 				18934B951CB38A5300790E13 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-		18934B9E1CB38A6200790E13 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				18934B9D1CB38A6200790E13 /* Base */,
-			);
-			name = Main.storyboard;
-			path = "../../CTTextDisplayView-master/CoreTextDemo01";
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -545,6 +536,7 @@
 				18934B9C1CB38A5300790E13 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

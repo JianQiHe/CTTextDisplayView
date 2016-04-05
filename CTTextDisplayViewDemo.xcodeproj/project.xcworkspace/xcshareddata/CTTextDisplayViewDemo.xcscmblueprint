@@ -1,0 +1,28 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "79BDCDCE0B958FF4E40A4721A1B717E2F208F251",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "79BDCDCE0B958FF4E40A4721A1B717E2F208F251" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "B85E7E01-B867-4F1D-8647-D6BC44245866",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "79BDCDCE0B958FF4E40A4721A1B717E2F208F251" : ""
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "CTTextDisplayViewDemo",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "CTTextDisplayViewDemo.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/BrownCN023\/CTTextDisplayView.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "79BDCDCE0B958FF4E40A4721A1B717E2F208F251"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/BrownCN023\/CTTextDisplayView.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "79BDCDCE0B958FF4E40A4721A1B717E2F208F251"
+    }
+  ]
+}
