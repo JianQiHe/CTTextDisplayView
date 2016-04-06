@@ -48,7 +48,7 @@ CGFloat RunDelegateGetWidthCallback(void *refCon)
 @implementation CTTextRun
 
 - (void)dealloc{
-//    NSLog(@"--- dealloc %@ ---",[self class]);
+    //    NSLog(@"--- dealloc %@ ---",[self class]);
 }
 
 - (id)init{
@@ -73,6 +73,7 @@ CGFloat RunDelegateGetWidthCallback(void *refCon)
     NSMutableString * attStr = attString.mutableString;
     NSError *error = nil;
     NSString *regulaStr = @"\\d{3}-\\d{8}|\\d{3}-\\d{7}|\\d{4}-\\d{8}|\\d{4}-\\d{7}|1+[358]+\\d{9}|\\d{8}|\\d{7}";
+    //@"((\\d{11})|^((\\d{7,8})|(\\d{4}|\\d{3})-(\\d{7,8})|(\\d{4}|\\d{3})-(\\d{7,8})-(\\d{4}|\\d{3}|\\d{2}|\\d{1})|(\\d{7,8})-(\\d{4}|\\d{3}|\\d{2}|\\d{1}))$)";
     NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:regulaStr
                                                                            options:NSRegularExpressionCaseInsensitive
                                                                              error:&error];
@@ -81,19 +82,26 @@ CGFloat RunDelegateGetWidthCallback(void *refCon)
         NSArray *arrayOfAllMatches = [regex matchesInString:attStr
                                                     options:0
                                                       range:NSMakeRange(0, [attStr length])];
+        //        NSLog(@"regularResults: %@",regularResults);
+        
+        
         
         for (NSTextCheckingResult *match in arrayOfAllMatches){
             
             NSRange matchRange = match.range;
             
-            NSString* substringForMatch = [attStr substringWithRange:matchRange];
             BOOL isContinue = NO;
-            for(NSString * matchStr in regularResults){
-                isContinue = [matchStr containsString:substringForMatch];
+            for(NSValue * value in regularResults){
+                if(NSMaxRange(NSIntersectionRange(matchRange, value.rangeValue)) > 0){
+                    isContinue = YES;
+                    break;
+                }
             }
             if(isContinue){
                 continue;
             }
+            
+            NSString* substringForMatch = [attStr substringWithRange:matchRange];
             NSValue * valueRange = [NSValue valueWithRange:matchRange];
             
             [attString addAttribute:(NSString *)kCTForegroundColorAttributeName value:(id)color.CGColor range:matchRange];
@@ -102,7 +110,7 @@ CGFloat RunDelegateGetWidthCallback(void *refCon)
                 [attString addAttribute:(NSString *)kCTUnderlineStyleAttributeName value:(id)[NSNumber numberWithInt:kCTUnderlineStyleSingle] range:matchRange];
             }
             
-//            [regularResults addObject:substringForMatch];
+            //            [regularResults addObject:substringForMatch];
             
         }
     }
@@ -129,6 +137,10 @@ CGFloat RunDelegateGetWidthCallback(void *refCon)
             NSValue * valueRange = [NSValue valueWithRange:matchRange];
             
             NSString* substringForMatch = [attStr substringWithRange:matchRange];
+            
+            //            NSLog(@"EMAIL:  %@    (%lu,%lu)",substringForMatch,(unsigned long)matchRange.location,(unsigned long)matchRange.length);
+            
+            
             [attString addAttribute:(NSString *)kCTForegroundColorAttributeName value:(id)color.CGColor range:matchRange];
             
             [attString addAttribute:@"keyAttribute" value:[NSString stringWithFormat:@"E%@{%@}",substringForMatch,valueRange] range:matchRange];
@@ -136,8 +148,8 @@ CGFloat RunDelegateGetWidthCallback(void *refCon)
                 [attString addAttribute:(NSString *)kCTUnderlineStyleAttributeName value:(id)[NSNumber numberWithInt:kCTUnderlineStyleSingle] range:matchRange];
             }
             
-            [regularResults addObject:substringForMatch];
-//            NSLog(@"substringForMatch:%@",substringForMatch);
+            [regularResults addObject:valueRange];
+            //            NSLog(@"substringForMatch:%@",substringForMatch);
         }
     }
 }
@@ -170,14 +182,14 @@ CGFloat RunDelegateGetWidthCallback(void *refCon)
             if(urlUnderLine){
                 [attString addAttribute:(NSString *)kCTUnderlineStyleAttributeName value:(id)[NSNumber numberWithInt:kCTUnderlineStyleSingle] range:matchRange];
             }
-            [regularResults addObject:substringForMatch];
+            [regularResults addObject:valueRange];
         }
     }
 }
 
 #pragma mark - at
 + (void)runsAtWithAttString:(NSMutableAttributedString *)attString attStr:(NSMutableString *)attStr  startIndex:(NSInteger)startIndex forIndex:(NSInteger *)forIndex  color:(UIColor *)color{
-
+    
     NSInteger length = *forIndex-startIndex+1;
     if(length > 2 && length < 20){
         NSRange range = NSMakeRange(startIndex, length);
@@ -201,7 +213,7 @@ CGFloat RunDelegateGetWidthCallback(void *refCon)
         [attString addAttribute:@"keyAttribute" value:[NSString stringWithFormat:@"@%@{%@}",contentStr,[NSValue valueWithRange:atRange]] range:atRange];
         *forIndex -= length-1;
     }
-
+    
 }
 
 #pragma mark - subject
@@ -323,11 +335,11 @@ CGFloat RunDelegateGetWidthCallback(void *refCon)
     BOOL keyStart = NO;
     NSInteger keyStartIndex = -1;
     
-//    NSLog(@"-----------------------------------------");
+    //    NSLog(@"-----------------------------------------");
     
     for(NSInteger i=0;i<attStr.length;i++){
         NSString * ch = [attStr substringWithRange:NSMakeRange(i, 1)];
-//        NSLog(@"ch: %@       %d",ch,i);
+        //        NSLog(@"ch: %@       %d",ch,i);
         if([ch isEqualToString:@"@"]){
             atStart = YES;
             subjectStart = NO;

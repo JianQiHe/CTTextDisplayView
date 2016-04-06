@@ -20,14 +20,14 @@
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
     
-    NSString * text = @"${李四} 回复 ${王麻子:90} 想回家347991555@qq.com 13456890000 #{旅游节}[拜拜][鄙视]13456890000四:32}And@{王麻子:12}\ue056宝https://www.google.com/贵的@时间[拜拜]视]@{W}@{}我@{张三:12} 自[鄙www.baidu.com[拜@{ABC}拜][悲伤]视]横[悲伤]刀[拜拜]向天@{王麻子:12}笑[拜拜]，@{去留肝胆两昆}仑。 This is my first CoreText #${王麻子}{张家#{北京奥运会}界旅游}#{周杰伦:23} https://www.google.com/ demo,how are you ?I [拜拜] love three [@{[拜拜]独往来[鄙视][悲伤],.说愁。[悲伤]@{王麻子:12}笑[拜拜]，@{去留肝胆两昆}仑。";
+    NSString * text = @"${李四} 回复 ${王麻子:90} 想回家78356655@qq.com78356655创业者0755-78356655http://www.34567823.com34567823 13456890000 #{旅游节}[拜拜][鄙视]13456890000四:32}And@{王麻子:12}\ue056宝https://www.google.com/贵的@时间[拜拜]视]@{W}@{}我@{张三:12} 自[鄙www.baidu.com[拜@{ABC}拜][悲伤]视]横[悲伤]刀[拜拜]向天@{王麻子:12}笑[拜拜]，@{去留肝胆两昆}仑。 This is my first CoreText #${王麻子}{张家#{北京奥运会}界旅游}#{周杰伦:23} https://www.google.com/ demo,how are you ?I [拜拜] love three [@{[拜拜]独往来[鄙视][悲伤],.说愁。[悲伤]@{王麻子:12}笑[拜拜]，@{去留肝胆两昆}仑。";
     
     CTTextStyleModel * styleModel = [CTTextStyleModel new];
     styleModel.font = [UIFont systemFontOfSize:25];
     styleModel.faceSize = CGSizeMake(40, 40);
     styleModel.faceOffset = 11;
     styleModel.lineSpace = 8.0f;
-    styleModel.numberOfLines = 4;
+    styleModel.numberOfLines = 5;
     styleModel.highlightBackgroundRadius = 5;
     styleModel.emailColor = [UIColor orangeColor];
     styleModel.phoneColor = [UIColor redColor];
@@ -44,7 +44,7 @@
     
     textDisplayView.text = text;
     
-
+    
     
     CTTextStyleModel * styleModel2 = [CTTextStyleModel new];
     styleModel2.font = [UIFont systemFontOfSize:17];
@@ -76,20 +76,20 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
     
-    }
+}
 
 - (void)ct_textDisplayView:(CTTextDisplayView *)textDisplayView obj:(id)obj{
-        NSLog(@"key: %@          value: %@",obj[@"key"],obj[@"value"]);
+    NSLog(@"key: %@          value: %@",obj[@"key"],obj[@"value"]);
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

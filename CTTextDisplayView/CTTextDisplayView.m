@@ -25,7 +25,7 @@
 @implementation CTTextDisplayView
 
 - (void)dealloc{
-//    NSLog(@"--- dealloc %@ ---",[self class]);
+    //    NSLog(@"--- dealloc %@ ---",[self class]);
 }
 
 - (id)initWithFrame:(CGRect)frame{
@@ -193,7 +193,7 @@
     
     
     
-
+    
     //自动计算高度(此处计算并得到高度后再重新绘制)
     if(_private_autoHeight && _private_need_calc_height){
         CFRelease(pathRef);
@@ -245,10 +245,10 @@
         }
         
         CTLineRef lineRef= CFArrayGetValueAtIndex(lines, i);
-//        CGFloat lineAscent;
-//        CGFloat lineDescent;
-//        CGFloat lineLeading;
-//        CTLineGetTypographicBounds(lineRef, &lineAscent, &lineDescent, &lineLeading);
+        //        CGFloat lineAscent;
+        //        CGFloat lineDescent;
+        //        CGFloat lineLeading;
+        //        CTLineGetTypographicBounds(lineRef, &lineAscent, &lineDescent, &lineLeading);
         
         CGPoint lineOrigin = lineOrigins[i];
         frameY = CGRectGetHeight(self.bounds) - (i + 1)*lineHeight - font.descender;
@@ -279,7 +279,7 @@
             {
                 CGFloat runAscent,runDescent;
                 CGFloat runWidth  = CTRunGetTypographicBounds(runRef, CFRangeMake(0,0), &runAscent, &runDescent, NULL);
-//                CGFloat runHeight = (lineAscent + lineDescent );
+                //                CGFloat runHeight = (lineAscent + lineDescent );
                 
                 CGFloat runPointX = runRect.origin.x + lineOrigin.x;
                 CGFloat runPointY = lineOrigin.y-faceOffset;
@@ -290,7 +290,7 @@
                 if(firstCharAttribute == 'U' || firstCharAttribute == '@' || firstCharAttribute == '#' || firstCharAttribute == '$' || firstCharAttribute == 'E' || firstCharAttribute == 'P'){
                     keyRect = CGRectMake(runPointX, lineOrigin.y-(lineHeight-lineSpace/2.0)/4, runWidth, lineHeight-lineSpace/2.0);//CGRectMake(runPointX, runPointY, runWidth, runHeight);
                     
-//                    NSLog(@"keyAttribute:%@   x:%f  y:%f   w:%f    h:%f   ",keyAttribute,keyRect.origin.x,keyRect.origin.y,keyRect.size.width,keyRect.size.height);
+                    //                    NSLog(@"keyAttribute:%@   x:%f  y:%f   w:%f    h:%f   ",keyAttribute,keyRect.origin.x,keyRect.origin.y,keyRect.size.width,keyRect.size.height);
                     
                     NSMutableArray * obj = [self.keyAttributeDict objectForKey:keyAttribute];
                     if(obj == nil){
@@ -326,11 +326,11 @@
     }
     
     //通过context在frame中描画文字内容
-//    CTFrameDraw(frameRef, contextRef);
+    //    CTFrameDraw(frameRef, contextRef);
     CFRelease(pathRef);
     CFRelease(frameRef);
     CFRelease(framesetterRef);
-
+    
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
@@ -429,7 +429,7 @@
             }
         }
     }];
-     //***/
+    //***/
 }
 
 
