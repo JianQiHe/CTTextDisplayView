@@ -22,7 +22,9 @@
 
 示例(图片的原文本):
 
-${李四} \<a href='ftp://www.baidu.com'\>FTP百度\</a\>回http://www.3452324.com右\<a href='www.baidu.com’\>WWW百度\</a\>复\<a href='https://www.google.com'\>Google\</a\>${张三} \<sub\>周杰伦\</sub\>\<key\>李四\</key\>\<at\>猪八戒\</at\>1233回工WEcx回上张三复face halo ha 王麻子:90 想人们回家78356655@qq.com[拜拜][鄙视]78356655 0755-78356655http://www.3452324.com[鄙视]34567823 #{旅游节DD} 13456890000 [拜拜][鄙视]13456890000四:32}And@{王麻子:12}\ue056宝https://www.google.com/贵的@时间[拜拜]视我 自鄙www.baidu.com[拜<at>想回家</at>拜[悲伤]视]横[悲伤]刀[拜拜]向天@{王麻子:12}笑[拜拜]，@{去留肝胆两昆}仑。 This is my first CoreText #${王麻子}{张家#{北京奥运会}界旅游}#{周杰伦:23}[拜拜]独往来[拜拜]独往来[鄙视]独往来[悲伤]。
+<pre>
+${李四} <a href='ftp://www.baidu.com'>FTP百度</a>回http://www.3452324.com右<a href='www.baidu.com'>WWW百度</a>复<a href='https://www.google.com'>Google</a>${张三} <sub>周杰伦</sub><key>李四</key><at>猪八戒</at>1233回工WEcx回上张三复face halo ha 王麻子:90 想人们回家78356655@qq.com[拜拜][鄙视]78356655 0755-78356655http://www.3452324.com[鄙视]34567823 #{旅游节DD} 13456890000 [拜拜][鄙视]13456890000四:32}And@{王麻子:12}\ue056宝https://www.google.com/贵的@时间[拜拜]视我 自鄙www.baidu.com[拜<at>想回家</at>拜[悲伤]视]横[悲伤]刀[拜拜]向天@{王麻子:12}笑[拜拜]，@{去留肝胆两昆}仑。 This is my first CoreText #${王麻子}{张家#{北京奥运会}界旅游}#{周杰伦:23}[拜拜]独往来[拜拜]独往来[鄙视]独往来[悲伤]。
+</pre>
 
 *********************  email:347991555@q.com   *************************
 
