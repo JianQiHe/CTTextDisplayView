@@ -23,7 +23,7 @@
 示例(图片的原文本):
 
 <pre>
-${李四} < a href='ftp://www.baidu.com'>FTP百度</a>回http://www.3452324.com右<a href='www.baidu.com'>WWW百度</a>复<a href='https://www.google.com'>Google</a>
+${李四} < a href='ftp://www.baidu.com'>FTP百度< /a>回http://www.3452324.com右< a href='www.baidu.com'>WWW百度< /a>复< a href='https://www.google.com'>Google< /a>
 ${张三} <sub>周杰伦</sub><key>李四</key><at>猪八戒</at>1233回工WEcx回上张三复
 face halo ha 王麻子:90 想人们回家78356655@qq.com[拜拜][鄙视]78356655 
 0755-78356655http://www.3452324.com[鄙视]34567823 #{旅游节DD} 13456890000
