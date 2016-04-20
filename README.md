@@ -25,14 +25,14 @@
   效果:xxx@张三xxx
 
   代码:xxx@{张三}xxx 或 xxx@{张三:id}xxx
-  <br>
-  \n
+  
+  
 
   效果:xxx#过年了#xxx
 
   代码:xxx#{过年了}xxx  或  xxx#{过年了:id}xxx
 
-
+    
 
   效果:张三 回复 李四
 
