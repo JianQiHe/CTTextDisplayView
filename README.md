@@ -38,4 +38,4 @@
 
 *********************  email:347991555@q.com   *************************
 
-![CTTextDisplayView](https://github.com/BrownCN023/CTTextDisplayView/blob/master/ScreenShot.png)
+![CTTextDisplayView](https://github.com/BrownCN023/CTTextDisplayView/blob/master/ScreenShot_02.png)
