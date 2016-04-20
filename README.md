@@ -3,7 +3,7 @@
 
 1、更新所有匹配用正则表达式
 
-2、添加标签<at></at> <sub></sub> <key></key> <a></a> <a href=‘http://www.xxx.com/’></a>
+2、添加xml标签\<at\>\</at\> <sub></sub> <key></key> <a></a> <a href=‘http://www.xxx.com/’></a>
 
 
 ************* 更新 2016/04/07 修复URL、邮箱中已存在号码而导致后续号码表达式不验证此号码问题 *************
