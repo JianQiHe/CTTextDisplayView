@@ -19,11 +19,12 @@
 }
 
 - (void)initData{
+    self.textColor = [UIColor blackColor];
     self.font = [UIFont systemFontOfSize:17];
     self.numberOfLines = -1;
     self.faceOffset = 6;
     self.faceSize = CGSizeMake(25, 25);
-//    self.styleColor = [UIColor blueColor];
+    //    self.styleColor = [UIColor blueColor];
     self.highlightBackgroundColor = [UIColor colorWithRed:0.9 green:0.9 blue:0.9 alpha:1.0];
     
     self.atColor = [UIColor blueColor];

@@ -11,6 +11,8 @@
 
 @interface CTTextStyleModel : NSObject
 
+@property (nonatomic,strong) UIColor * textColor;     //文本颜色
+
 @property (nonatomic,strong) UIFont * font;
 @property (nonatomic,assign) CGFloat fontSpace;       //字间隔
 @property (nonatomic,assign) CGSize faceSize;         //表情尺寸(长宽相等)

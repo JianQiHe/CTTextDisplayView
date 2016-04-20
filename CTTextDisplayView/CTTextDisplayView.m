@@ -61,6 +61,9 @@
     CTFontRef fontRef = CTFontCreateWithName((__bridge CFStringRef)font.fontName, font.pointSize, NULL);
     [attString addAttribute:(NSString*)kCTFontAttributeName value:(__bridge id)fontRef range:NSMakeRange(0,attString.length)];
     
+    //设置字体颜色
+    [attString addAttribute:(NSString *)kCTForegroundColorAttributeName value:(id)styleModel.textColor.CGColor range:NSMakeRange(0,attString.length)];
+    
     CFRelease(fontRef);
     
     //设置字距
@@ -114,6 +117,7 @@
     CFArrayRef lines = CTFrameGetLines(frameRef);
     CFIndex lineCount = CFArrayGetCount(lines);
     
+    
     CFRelease(pathRef);
     CFRelease(frameRef);
     CFRelease(framesetterRef);
@@ -162,7 +166,6 @@
     CGFloat highlightBackgroundRadius = _styleModel.highlightBackgroundRadius;
     UIColor * highlightBackgroundColor = _styleModel.highlightBackgroundColor;
     
-    
     NSMutableAttributedString *attString = [CTTextDisplayView createAttributedStringWithText:_text styleModel:_styleModel];
     
     CTTextRun * textRun = [[CTTextRun alloc] init];
@@ -172,6 +175,7 @@
     //绘图上下文
     CGContextRef contextRef = UIGraphicsGetCurrentContext();
     CGContextSetStrokeColorWithColor(contextRef, self.backgroundColor.CGColor);
+    
     CGContextSetTextMatrix(contextRef, CGAffineTransformIdentity);
     CGContextTranslateCTM(contextRef, 0, CGRectGetHeight(self.bounds)); // 此处用计算出来的高度
     CGContextScaleCTM(contextRef, 1.0, -1.0);
@@ -190,8 +194,6 @@
     
     CFArrayRef lines = CTFrameGetLines(frameRef);
     CFIndex lineCount = CFArrayGetCount(lines);
-    
-    
     
     
     //自动计算高度(此处计算并得到高度后再重新绘制)
@@ -226,14 +228,12 @@
         for(int i=0;i<a_count;i++){
             NSValue * rectValue =_currentKeyRectArray[i];
             CGRect rect = [rectValue CGRectValue];
-            //CGRectMake(65.283691, 281.258789, 50.000000, 23.800001)
             CGPathRef path = [[UIBezierPath bezierPathWithRoundedRect:rect cornerRadius:highlightBackgroundRadius] CGPath];
             CGContextSetFillColorWithColor(contextRef, highlightBackgroundColor.CGColor);
             CGContextAddPath(contextRef, path);
             CGContextFillPath(contextRef);
         }
     }
-    
     
     CGFloat frameY = 0;
     CGFloat lineHeight = font.lineHeight+lineSpace;
@@ -288,9 +288,9 @@
                 char firstCharAttribute = [keyAttribute characterAtIndex:0];
                 
                 if(firstCharAttribute == 'U' || firstCharAttribute == '@' || firstCharAttribute == '#' || firstCharAttribute == '$' || firstCharAttribute == 'E' || firstCharAttribute == 'P'){
-                    keyRect = CGRectMake(runPointX, lineOrigin.y-(lineHeight-lineSpace/2.0)/4, runWidth, lineHeight-lineSpace/2.0);//CGRectMake(runPointX, runPointY, runWidth, runHeight);
-                    
-                    //                    NSLog(@"keyAttribute:%@   x:%f  y:%f   w:%f    h:%f   ",keyAttribute,keyRect.origin.x,keyRect.origin.y,keyRect.size.width,keyRect.size.height);
+                    //                    keyRect = CGRectMake(runPointX, lineOrigin.y-lineSpace, runWidth, lineHeight);
+                    keyRect = CGRectMake(runPointX, lineOrigin.y-(lineHeight-lineSpace/2.0)/4, runWidth, lineHeight-lineSpace/2.0);
+                    //CGRectMake(runPointX, runPointY, runWidth, runHeight);
                     
                     NSMutableArray * obj = [self.keyAttributeDict objectForKey:keyAttribute];
                     if(obj == nil){

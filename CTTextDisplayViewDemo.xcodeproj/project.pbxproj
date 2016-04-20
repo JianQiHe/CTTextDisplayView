@@ -67,6 +67,7 @@
 		18934C6F1CB38BC300790E13 /* d_landelini@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 18934C401CB38BC300790E13 /* d_landelini@3x.png */; };
 		18934C721CB38E3100790E13 /* CTTextStyleModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18934C711CB38E3100790E13 /* CTTextStyleModel.m */; };
 		C06D594C1CB3E9C7004C41EE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C06D594B1CB3E9C7004C41EE /* Main.storyboard */; };
+		C0AA9B221CC7D5D200C83307 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C0AA9B211CC7D5D200C83307 /* icon@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -140,6 +141,7 @@
 		18934C701CB38E3100790E13 /* CTTextStyleModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTTextStyleModel.h; sourceTree = "<group>"; };
 		18934C711CB38E3100790E13 /* CTTextStyleModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTTextStyleModel.m; sourceTree = "<group>"; };
 		C06D594B1CB3E9C7004C41EE /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		C0AA9B211CC7D5D200C83307 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,6 +158,7 @@
 		18934B7A1CB38A5300790E13 = {
 			isa = PBXGroup;
 			children = (
+				C0AA9B211CC7D5D200C83307 /* icon@2x.png */,
 				18934BA01CB38A7400790E13 /* CTTextDisplayView */,
 				18934B851CB38A5300790E13 /* CTTextDisplayViewDemo */,
 				18934B841CB38A5300790E13 /* Products */,
@@ -367,6 +370,7 @@
 				18934C591CB38BC300790E13 /* d_haixiu@3x.png in Resources */,
 				18934C451CB38BC300790E13 /* d_beishang@2x.png in Resources */,
 				18934C5A1CB38BC300790E13 /* d_han@2x.png in Resources */,
+				C0AA9B221CC7D5D200C83307 /* icon@2x.png in Resources */,
 				18934C551CB38BC300790E13 /* d_guzhang@2x.png in Resources */,
 				18934C411CB38BC300790E13 /* d_aini@2x.png in Resources */,
 				18934C4F1CB38BC300790E13 /* d_dahaqi@2x.png in Resources */,
