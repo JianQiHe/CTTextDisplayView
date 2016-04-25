@@ -39,3 +39,5 @@ com'>Google< /a>回http://www.3452324.com右< a href='www.baidu.com'>Baidu百度
 
 
 ![CTTextDisplayView](https://github.com/BrownCN023/CTTextDisplayView/blob/master/ScreenShot_03.png)
+
+![CTTextDisplayView](https://github.com/BrownCN023/CTTextDisplayView/blob/master/mov01.mov)
