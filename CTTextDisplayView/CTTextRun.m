@@ -37,6 +37,13 @@ CGFloat RunDelegateGetWidthCallback(void *refCon)
     return run.styleModel.faceSize.width;
 }
 
+CGFloat RunDelegateGetTagImgWidthCallback(void *refCon)
+{
+    CTTextRun *run =(__bridge CTTextRun *) refCon;
+    return run.styleModel.tagImgSize.width;
+}
+
+
 @interface CTTextRun()
 
 @property (nonatomic,strong) NSDictionary * emojis;
@@ -67,7 +74,7 @@ CGFloat RunDelegateGetWidthCallback(void *refCon)
 }
 
 #pragma mark - phone
-+ (void)runsPhoneWithAttString:(NSMutableAttributedString *)attString regularResults:(NSMutableArray *)regularResults  urlUnderLine:(BOOL)urlUnderLine color:(UIColor *)color{
++ (void)runsPhoneWithAttString:(NSMutableAttributedString *)attString regularResults:(NSMutableArray *)regularResults  styleModel:(CTTextStyleModel *)styleModel{
     NSMutableString * attStr = attString.mutableString;
     NSError *error = nil;
     NSString *regulaStr = @"\\d{3}-\\d{8}|\\d{3}-\\d{7}|\\d{4}-\\d{8}|\\d{4}-\\d{7}|1+[358]+\\d{9}|\\d{8}|\\d{7}";
@@ -99,9 +106,9 @@ CGFloat RunDelegateGetWidthCallback(void *refCon)
             NSString* substringForMatch = [attStr substringWithRange:matchRange];
             NSValue * valueRange = [NSValue valueWithRange:matchRange];
             
-            [attString addAttribute:(NSString *)kCTForegroundColorAttributeName value:(id)color.CGColor range:matchRange];
+            [attString addAttribute:(NSString *)kCTForegroundColorAttributeName value:(id)styleModel.phoneColor.CGColor range:matchRange];
             [attString addAttribute:@"keyAttribute" value:[NSString stringWithFormat:@"P%@{%@}",substringForMatch,valueRange] range:matchRange];
-            if(urlUnderLine){
+            if(styleModel.phoneUnderLine){
                 [attString addAttribute:(NSString *)kCTUnderlineStyleAttributeName value:(id)[NSNumber numberWithInt:kCTUnderlineStyleSingle] range:matchRange];
             }
             
@@ -112,13 +119,14 @@ CGFloat RunDelegateGetWidthCallback(void *refCon)
 #pragma mark - e-mail
 // /([a-z0-9_\-\.]+)@(([a-z0-9]+[_\-]?)\.)+[a-z]{2,3}/i
 // [A-Z0-9a-z\\._%+-]+@([A-Za-z0-9-]+\\.)+[A-Za-z]{2,4}
-+ (void)runsEmailWithAttString:(NSMutableAttributedString *)attString regularResults:(NSMutableArray *)regularResults  urlUnderLine:(BOOL)urlUnderLine color:(UIColor *)color{
++ (void)runsEmailWithAttString:(NSMutableAttributedString *)attString regularResults:(NSMutableArray *)regularResults styleModel:(CTTextStyleModel *)styleModel{// urlUnderLine:(BOOL)urlUnderLine color:(UIColor *)color{
     NSMutableString * attStr = attString.mutableString;
     NSError *error = nil;;
     NSString *regulaStr = @"[A-Z0-9a-z\\._%+-]+@([A-Za-z0-9-]+\\.)+[A-Za-z]{2,4}";
     NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:regulaStr
                                                                            options:NSRegularExpressionCaseInsensitive
                                                                              error:&error];
+    
     if (error == nil)
     {
         NSArray *arrayOfAllMatches = [regex matchesInString:attStr
@@ -131,11 +139,10 @@ CGFloat RunDelegateGetWidthCallback(void *refCon)
             
             NSString* substringForMatch = [attStr substringWithRange:matchRange];
             
-            
-            [attString addAttribute:(NSString *)kCTForegroundColorAttributeName value:(id)color.CGColor range:matchRange];
+            [attString addAttribute:(NSString *)kCTForegroundColorAttributeName value:(id)styleModel.emailColor.CGColor range:matchRange];
             
             [attString addAttribute:@"keyAttribute" value:[NSString stringWithFormat:@"E%@{%@}",substringForMatch,valueRange] range:matchRange];
-            if(urlUnderLine){
+            if(styleModel.emailUnderLine){
                 [attString addAttribute:(NSString *)kCTUnderlineStyleAttributeName value:(id)[NSNumber numberWithInt:kCTUnderlineStyleSingle] range:matchRange];
             }
             
@@ -152,7 +159,9 @@ CGFloat RunDelegateGetWidthCallback(void *refCon)
     NSError *error = nil;;
     //<at>[a-zA-Z0-9_:\\u3400-\\u9FFF]{1,20}<\\/at>
     //    NSString * urlReg = @"((http[s]{0,1}|ftp)://[a-zA-Z0-9\\.\\-]+\\.([a-zA-Z]{2,4})(:\\d+)?(/[a-zA-Z0-9\\.\\-~!@#$%^&*+?:_/=<>]*)?)|(www.[a-zA-Z0-9\\.\\-]+\\.([a-zA-Z]{2,4})(:\\d+)?(/[a-zA-Z0-9\\.\\-~!@#$%^&*+?:_/=<>]*)?)";
-    NSString *regulaStr = [NSString stringWithFormat:@"<a href='(((http[s]{0,1}|ftp)://[a-zA-Z0-9\\.\\-]+\\.([a-zA-Z]{2,4})(:\\d+)?(/[a-zA-Z0-9\\.\\-~!@#$%@^&*+?:_/=<>]*)?)|(www.[a-zA-Z0-9\\.\\-]+\\.([a-zA-Z]{2,4})(:\\d+)?(/[a-zA-Z0-9\\.\\-~!@#$%@^&*+?:_/=<>]*)?))'>[a-zA-Z0-9_\\u3400-\\u9FFF]*<\\/a>|(((http[s]{0,1}|ftp)://[a-zA-Z0-9\\.\\-]+\\.([a-zA-Z]{2,4})(:\\d+)?(/[a-zA-Z0-9\\.\\-~!@#$%@^&*+?:_/=<>]*)?)|(www.[a-zA-Z0-9\\.\\-]+\\.([a-zA-Z]{2,4})(:\\d+)?(/[a-zA-Z0-9\\.\\-~!@#$%@^&*+?:_/=<>]*)?))",@"%",@"%",@"%",@"%"];//(<a href='%@'>[^<>]*</at>)
+    //^((?!hede).)*$
+    //    [a-zA-Z0-9_, \\u3400-\\u9FFF]*
+    NSString *regulaStr = [NSString stringWithFormat:@"<a href='(((http[s]{0,1}|ftp)://[a-zA-Z0-9\\.\\-]+\\.([a-zA-Z]{2,4})(:\\d+)?(/[a-zA-Z0-9\\.\\-~!@#$%@^&*+?:_/=<>]*)?)|(www.[a-zA-Z0-9\\.\\-]+\\.([a-zA-Z]{2,4})(:\\d+)?(/[a-zA-Z0-9\\.\\-~!@#$%@^&*+?:_/=<>]*)?))'>((?!<\\/a>).)*<\\/a>|(((http[s]{0,1}|ftp)://[a-zA-Z0-9\\.\\-]+\\.([a-zA-Z]{2,4})(:\\d+)?(/[a-zA-Z0-9\\.\\-~!@#$%@^&*+?:_/=<>]*)?)|(www.[a-zA-Z0-9\\.\\-]+\\.([a-zA-Z]{2,4})(:\\d+)?(/[a-zA-Z0-9\\.\\-~!@#$%@^&*+?:_/=<>]*)?))",@"%",@"%",@"%",@"%"];//(<a href='%@'>[^<>]*</at>)
     NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:regulaStr
                                                                            options:NSRegularExpressionCaseInsensitive
                                                                              error:&error];
@@ -188,23 +197,31 @@ CGFloat RunDelegateGetWidthCallback(void *refCon)
                 
                 NSString * t_str = contentArr[2];
                 
-                replaceStr = [t_str substringWithRange:NSMakeRange(1, t_str.length-5)];
+                NSString * url_pre = @"[link]";
+                //                NSLog(@"url_p: %lu",(unsigned long)url_pre.length);
+                
+                replaceStr = [NSString stringWithFormat:@"%@%@",url_pre,[t_str substringWithRange:NSMakeRange(1, t_str.length-5)]];
+                //[NSString stringWithFormat:@"[链接]%@",
+                
+                //                 NSLog(@"url: %lu     %@",replaceStr.length,replaceStr);
                 
                 [attString replaceCharactersInRange:NSMakeRange(startIndex, matchRange.length) withString:replaceStr];
                 
                 NSRange range = NSMakeRange(startIndex, replaceStr.length);
                 
                 [attString addAttribute:(NSString *)kCTForegroundColorAttributeName value:(id)color.CGColor range:range];
-                [attString addAttribute:@"keyAttribute" value:[NSString stringWithFormat:@"U%@{%@}",contentStr,[NSValue valueWithRange:range]] range:range];
-                if(urlUnderLine){
-                    [attString addAttribute:(NSString *)kCTUnderlineStyleAttributeName value:(id)[NSNumber numberWithInt:kCTUnderlineStyleSingle] range:range];
-                }
+                [attString addAttribute:@"keyAttribute" value:[NSString stringWithFormat:@"H%@{%@}",contentStr,[NSValue valueWithRange:range]] range:range];
                 
                 [regularResults addObject:[NSValue valueWithRange:range]];
                 
                 forIndex += substringForMatch.length-replaceStr.length;
             }else{
-                NSRange range = NSMakeRange(startIndex, matchRange.length);
+                
+                replaceStr = [NSString stringWithFormat:@"%@",substringForMatch];
+                
+                [attString replaceCharactersInRange:NSMakeRange(startIndex, matchRange.length) withString:replaceStr];
+                
+                NSRange range = NSMakeRange(startIndex, replaceStr.length);
                 
                 [attString addAttribute:(NSString *)kCTForegroundColorAttributeName value:(id)color.CGColor range:range];
                 
@@ -215,6 +232,9 @@ CGFloat RunDelegateGetWidthCallback(void *refCon)
                 }
                 
                 [regularResults addObject:[NSValue valueWithRange:range]];
+                
+                //                forIndex -= 4;
+                forIndex += substringForMatch.length-replaceStr.length;
             }
         }
     }
@@ -393,7 +413,13 @@ CGFloat RunDelegateGetWidthCallback(void *refCon)
                     imageCallbacks.dealloc = RunDelegateDeallocCallback;
                     imageCallbacks.getAscent = RunDelegateGetAscentCallback;
                     imageCallbacks.getDescent = RunDelegateGetDescentCallback;
-                    imageCallbacks.getWidth = RunDelegateGetWidthCallback;
+                    if([substringForMatch characterAtIndex:1] == 'l'){
+                        imageCallbacks.getWidth = RunDelegateGetTagImgWidthCallback;
+                        //                        [attString addAttribute:@"keyAttribute" value:[NSString stringWithFormat:@"%@",imageName] range:NSMakeRange(startIndex, 1)];
+                    }else{
+                        imageCallbacks.getWidth = RunDelegateGetWidthCallback;
+                        //                        [attString addAttribute:@"keyAttribute" value:[NSString stringWithFormat:@"%@",imageName] range:NSMakeRange(startIndex, 1)];
+                    }
                     
                     [attString replaceCharactersInRange:NSMakeRange(startIndex, matchRange.length) withString:@" "];
                     
@@ -402,7 +428,8 @@ CGFloat RunDelegateGetWidthCallback(void *refCon)
                     [attString addAttribute:(NSString *)kCTRunDelegateAttributeName value:(__bridge id)runDelegate range:NSMakeRange(startIndex, 1)];
                     CFRelease(runDelegate);
                     
-                    [attString addAttribute:@"keyAttribute" value:[NSString stringWithFormat:@"F:%@",imageName] range:NSMakeRange(startIndex, 1)];
+                    [attString addAttribute:@"keyAttribute" value:[NSString stringWithFormat:@"%@",imageName] range:NSMakeRange(startIndex, 1)];
+                    
                     
                     forIndex += substringForMatch.length-1;
                 }
@@ -428,10 +455,10 @@ CGFloat RunDelegateGetWidthCallback(void *refCon)
     [CTTextRun runsRULWithAttString:attString regularResults:_regularResult urlUnderLine:_styleModel.urlUnderLine color:_styleModel.urlColor];
     
     //emojis
-    [CTTextRun runsEmailWithAttString:attString regularResults:_regularResult urlUnderLine:_styleModel.emailUnderLine color:_styleModel.emailColor];
+    [CTTextRun runsEmailWithAttString:attString regularResults:_regularResult styleModel:_styleModel];
     
     //电话号码比较特殊，有可能是URL、Email的一部分，所以放在URL、Email后面匹配，在URL Email中把匹配表达式的字符串存起来，而在电话规则里面不用存储
-    [CTTextRun runsPhoneWithAttString:attString regularResults:_regularResult urlUnderLine:_styleModel.phoneUnderLine color:_styleModel.phoneColor];
+    [CTTextRun runsPhoneWithAttString:attString regularResults:_regularResult styleModel:_styleModel];
     
     //@#$...
     [CTTextRun runsOtherWithAttString:attString regularResults:_regularResult styleModel:_styleModel emojis:_emojis emojisDelegate:self];

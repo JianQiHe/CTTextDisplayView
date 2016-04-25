@@ -8,5 +8,7 @@
 	<string>d_beishang.png</string>
 	<key>[鄙视]</key>
 	<string>d_bishi.png</string>
+	<key>[link]</key>
+	<string>hyperlink.png</string>
 </dict>
 </plist>

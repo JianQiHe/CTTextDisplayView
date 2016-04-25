@@ -1,12 +1,9 @@
 # CTTextDisplayView
+
+
+************* 更新 2016/04/25 修复正则表达式，添加链接图片标签(仿sina微博) *************
+
 ************* 更新 2016/04/21  更新所有匹配用正则表达式，添加xml标签\<at\>\</at\> \<sub\>\</sub\> \<key\>\</key\> \<a\>\</a\> \<a href=‘***’\>\</a\> *************
-
-
-
-
-
-
-
 
 ************* 更新 2016/04/07 修复URL、邮箱中已存在号码而导致后续号码表达式不验证此号码问题 *************
 
@@ -37,4 +34,4 @@ face halo ha 王麻子:90 想人们回家78356655@qq.com[拜拜][鄙视]78356655
 </pre>
 
 
-![CTTextDisplayView](https://github.com/BrownCN023/CTTextDisplayView/blob/master/ScreenShot_02.png)
+![CTTextDisplayView](https://github.com/BrownCN023/CTTextDisplayView/blob/master/ScreenShot_03.png)

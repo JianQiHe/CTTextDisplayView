@@ -238,6 +238,8 @@
     CGFloat frameY = 0;
     CGFloat lineHeight = font.lineHeight+lineSpace;
     
+    CGRect prevImgRect = CGRectZero;
+    
     for (int i = 0; i < lineCount; i++)
     {
         if(!isAutoHeight && ( numberOfLines >= 0 && !(i < numberOfLines))){
@@ -287,24 +289,39 @@
                 CGRect keyRect = CGRectZero;
                 char firstCharAttribute = [keyAttribute characterAtIndex:0];
                 
-                if(firstCharAttribute == 'U' || firstCharAttribute == '@' || firstCharAttribute == '#' || firstCharAttribute == '$' || firstCharAttribute == 'E' || firstCharAttribute == 'P'){
-                    //                    keyRect = CGRectMake(runPointX, lineOrigin.y-lineSpace, runWidth, lineHeight);
-                    keyRect = CGRectMake(runPointX, lineOrigin.y-(lineHeight-lineSpace/2.0)/4, runWidth, lineHeight-lineSpace/2.0);
-                    //CGRectMake(runPointX, runPointY, runWidth, runHeight);
+                if(firstCharAttribute == 'H' || firstCharAttribute == 'U' || firstCharAttribute == '@' || firstCharAttribute == '#' || firstCharAttribute == '$' || firstCharAttribute == 'E' || firstCharAttribute == 'P'){
+                    
+                    keyRect = CGRectMake(runPointX, lineOrigin.y-(lineHeight+_styleModel.highlightBackgroundAdjustHeight-lineSpace)/4-_styleModel.highlightBackgroundOffset, runWidth, lineHeight+_styleModel.highlightBackgroundAdjustHeight);
                     
                     NSMutableArray * obj = [self.keyAttributeDict objectForKey:keyAttribute];
                     if(obj == nil){
                         obj = [NSMutableArray new];
+                        if(firstCharAttribute == 'H'){
+                            CGFloat t_w = 0;
+                            if(keyRect.origin.x == 0.0f){
+                                [obj addObject:[NSValue valueWithCGRect:prevImgRect]];
+                                //                                [self.keyAttributeDict setObject:obj forKey:keyAttribute];
+                                [self.keyRectDict setObject:keyAttribute forKey:[NSValue valueWithCGRect:prevImgRect]];
+                                
+                            }else{
+                                t_w = _styleModel.tagImgSize.width;
+                            }
+                            keyRect = CGRectMake(keyRect.origin.x-t_w, CGRectGetMinY(keyRect), CGRectGetWidth(keyRect)+t_w, CGRectGetHeight(keyRect));
+                        }
                     }
                     NSInteger objCount = obj.count;
                     BOOL rep = NO;
                     for(int rect_index=0;rect_index<objCount;rect_index++){
                         NSValue * rectValue = obj[rect_index];
                         CGRect rect_value = [rectValue CGRectValue];
+                        
                         if(rect_value.origin.y == keyRect.origin.y){
+                            
                             rect_value.size.width += keyRect.size.width;
+                            
                             [obj replaceObjectAtIndex:rect_index withObject:[NSValue valueWithCGRect:rect_value]];
                             rep = YES;
+                            
                             break;
                         }
                     }
@@ -314,11 +331,18 @@
                     [self.keyAttributeDict setObject:obj forKey:keyAttribute];
                     [self.keyRectDict setObject:keyAttribute forKey:[NSValue valueWithCGRect:keyRect]];
                 }else{
+                    
                     UIImage *image = [UIImage imageNamed:keyAttribute];
                     if (image) {
                         //runWidth, runHeight);
-                        keyRect = CGRectMake(runPointX, runPointY, faceSize.width,faceSize.height);
+                        if([keyAttribute isEqualToString:@"hyperlink.png"]){
+                            keyRect = CGRectMake(runPointX, runPointY+(lineHeight-_styleModel.tagImgSize.height)/2.0, _styleModel.tagImgSize.width,_styleModel.tagImgSize.height);
+                            prevImgRect = CGRectMake(runPointX, lineOrigin.y-(lineHeight+_styleModel.highlightBackgroundAdjustHeight-lineSpace)/4-_styleModel.highlightBackgroundOffset, _styleModel.tagImgSize.width, lineHeight+_styleModel.highlightBackgroundAdjustHeight);
+                        }else{
+                            keyRect = CGRectMake(runPointX, runPointY, faceSize.width,faceSize.height);
+                        }
                         CGContextDrawImage(contextRef, keyRect, image.CGImage);
+                        
                     }
                 }
             }
@@ -342,12 +366,15 @@
     CGPoint runLocation = CGPointMake(location.x, self.frame.size.height - location.y);
     
     
+    
+    
     [self.keyRectDict enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop){
         
         CGRect rect = [((NSValue *)key) CGRectValue];
         if(CGRectContainsPoint(rect, runLocation))
         {
             NSArray * objArr = [self.keyAttributeDict objectForKey:obj];
+            //            NSLog(@"self.keyAttributeDict: %@",self.keyAttributeDict);
             if(objArr){
                 self.currentKeyRectArray = objArr;
                 [self setNeedsDisplay];
@@ -393,6 +420,8 @@
                     key = @"E";
                 }else if(ch_key == 'P'){
                     key = @"P";
+                }else if(ch_key == 'H'){
+                    key = @"U";
                 }
                 
                 NSRange endRange = [((NSString *)obj) rangeOfString:@"{"];
