@@ -428,7 +428,7 @@ CGFloat RunDelegateGetTagImgWidthCallback(void *refCon)
                     [attString addAttribute:(NSString *)kCTRunDelegateAttributeName value:(__bridge id)runDelegate range:NSMakeRange(startIndex, 1)];
                     CFRelease(runDelegate);
                     
-                    [attString addAttribute:@"keyAttribute" value:[NSString stringWithFormat:@"%@",imageName] range:NSMakeRange(startIndex, 1)];
+                    [attString addAttribute:@"keyAttribute" value:[NSString stringWithFormat:@"F:%@(%ld,%lu)",imageName,(long)startIndex, (unsigned long)matchRange.length] range:NSMakeRange(startIndex, 1)];
                     
                     
                     forIndex += substringForMatch.length-1;

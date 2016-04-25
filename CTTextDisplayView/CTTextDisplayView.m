@@ -288,8 +288,27 @@
                 
                 CGRect keyRect = CGRectZero;
                 char firstCharAttribute = [keyAttribute characterAtIndex:0];
-                
-                if(firstCharAttribute == 'H' || firstCharAttribute == 'U' || firstCharAttribute == '@' || firstCharAttribute == '#' || firstCharAttribute == '$' || firstCharAttribute == 'E' || firstCharAttribute == 'P'){
+                if(firstCharAttribute == 'F'){
+                    NSArray * imageNameArr = [keyAttribute componentsSeparatedByString:@"("];
+                    NSString * imageName = nil;
+                    if(imageNameArr.count > 1){
+                        imageName = imageNameArr[0];
+                    }else{
+                        imageName = keyAttribute;
+                    }
+                    UIImage *image = [UIImage imageNamed:imageName];
+                    if (image) {
+                        //runWidth, runHeight);
+                        if([keyAttribute hasPrefix:@"F:hyperlink.png"]){
+                            keyRect = CGRectMake(runPointX, runPointY+(lineHeight-_styleModel.tagImgSize.height)/2.0, _styleModel.tagImgSize.width,_styleModel.tagImgSize.height);
+                            prevImgRect = CGRectMake(runPointX, lineOrigin.y-(lineHeight+_styleModel.highlightBackgroundAdjustHeight-lineSpace)/4-_styleModel.highlightBackgroundOffset, _styleModel.tagImgSize.width, lineHeight+_styleModel.highlightBackgroundAdjustHeight);
+                        }else{
+                            keyRect = CGRectMake(runPointX, runPointY, faceSize.width,faceSize.height);
+                        }
+                        CGContextDrawImage(contextRef, keyRect, image.CGImage);
+                        
+                    }
+                }else if(firstCharAttribute == 'H' || firstCharAttribute == 'U' || firstCharAttribute == '@' || firstCharAttribute == '#' || firstCharAttribute == '$' || firstCharAttribute == 'E' || firstCharAttribute == 'P'){
                     
                     keyRect = CGRectMake(runPointX, lineOrigin.y-(lineHeight+_styleModel.highlightBackgroundAdjustHeight-lineSpace)/4-_styleModel.highlightBackgroundOffset, runWidth, lineHeight+_styleModel.highlightBackgroundAdjustHeight);
                     
@@ -330,21 +349,22 @@
                     }
                     [self.keyAttributeDict setObject:obj forKey:keyAttribute];
                     [self.keyRectDict setObject:keyAttribute forKey:[NSValue valueWithCGRect:keyRect]];
-                }else{
-                    
-                    UIImage *image = [UIImage imageNamed:keyAttribute];
-                    if (image) {
-                        //runWidth, runHeight);
-                        if([keyAttribute isEqualToString:@"hyperlink.png"]){
-                            keyRect = CGRectMake(runPointX, runPointY+(lineHeight-_styleModel.tagImgSize.height)/2.0, _styleModel.tagImgSize.width,_styleModel.tagImgSize.height);
-                            prevImgRect = CGRectMake(runPointX, lineOrigin.y-(lineHeight+_styleModel.highlightBackgroundAdjustHeight-lineSpace)/4-_styleModel.highlightBackgroundOffset, _styleModel.tagImgSize.width, lineHeight+_styleModel.highlightBackgroundAdjustHeight);
-                        }else{
-                            keyRect = CGRectMake(runPointX, runPointY, faceSize.width,faceSize.height);
-                        }
-                        CGContextDrawImage(contextRef, keyRect, image.CGImage);
-                        
-                    }
                 }
+//                else{
+//                    
+//                    UIImage *image = [UIImage imageNamed:keyAttribute];
+//                    if (image) {
+//                        //runWidth, runHeight);
+//                        if([keyAttribute isEqualToString:@"hyperlink.png"]){
+//                            keyRect = CGRectMake(runPointX, runPointY+(lineHeight-_styleModel.tagImgSize.height)/2.0, _styleModel.tagImgSize.width,_styleModel.tagImgSize.height);
+//                            prevImgRect = CGRectMake(runPointX, lineOrigin.y-(lineHeight+_styleModel.highlightBackgroundAdjustHeight-lineSpace)/4-_styleModel.highlightBackgroundOffset, _styleModel.tagImgSize.width, lineHeight+_styleModel.highlightBackgroundAdjustHeight);
+//                        }else{
+//                            keyRect = CGRectMake(runPointX, runPointY, faceSize.width,faceSize.height);
+//                        }
+//                        CGContextDrawImage(contextRef, keyRect, image.CGImage);
+//                        
+//                    }
+//                }
             }
         }
     }
