@@ -26,7 +26,7 @@
 /**
      * 
      * < tag type='image' value='img001'>这是一张图片< /tag>  (type='image/video/link')
-     * < a href='https://www.xxx.com/'>XXX< /a>    链接XXX
+     * < a href='https://www.xxx.com/'>XXX< /a>    XXX
      * < at>猪八戒< /at>                            @猪八戒
      * < subject>旅游节< /subject>                  #旅游节#
      * < key>张三< /key>                            张三
