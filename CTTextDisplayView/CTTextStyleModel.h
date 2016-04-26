@@ -24,7 +24,7 @@
 @property (nonatomic,assign) NSInteger numberOfLines;   //默认为-1(<0为不限制行数)
 
 @property (nonatomic,assign) BOOL urlUnderLine;       //url下划线
-@property (nonatomic,assign) BOOL emailUnderLine;     //email下划线(有小bug，当tagImage位于行头或行尾时，图片没有下划线)
+@property (nonatomic,assign) BOOL emailUnderLine;     //email下划线
 @property (nonatomic,assign) BOOL phoneUnderLine;     //phone下划线
 
 @property (nonatomic,assign) CGFloat highlightBackgroundRadius;   //高亮圆角
@@ -32,7 +32,7 @@
 @property (nonatomic,assign) CGFloat highlightBackgroundOffset;   //高亮背景偏移
 @property (nonatomic,assign) CGFloat highlightBackgroundAdjustHeight;   //高亮背景高度调整
 
-@property (nonatomic,assign,getter=isAutoHeight) BOOL autoHeight;         //是否自动计算并调整高度()
+@property (nonatomic,assign,getter=isAutoHeight) BOOL autoHeight;  //是否自动计算并调整高度()，如果打开，效率将降低一丢丢儿
 
 @property (nonatomic,strong) UIColor * atColor;           //@
 @property (nonatomic,strong) UIColor * subjectColor;      //#

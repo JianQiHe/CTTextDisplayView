@@ -153,7 +153,7 @@ CGFloat RunDelegateGetTagImgWidthCallback(void *refCon)
 
 
 #pragma mark - url
-+ (void)runsRULWithAttString:(NSMutableAttributedString *)attString regularResults:(NSMutableArray *)regularResults urlUnderLine:(BOOL)urlUnderLine color:(UIColor *)color{
++ (void)runsURLWithAttString:(NSMutableAttributedString *)attString regularResults:(NSMutableArray *)regularResults styleModel:(CTTextStyleModel *)styleModel{
     
     NSMutableString * attStr = attString.mutableString;
     NSError *error = nil;;
@@ -185,31 +185,27 @@ CGFloat RunDelegateGetTagImgWidthCallback(void *refCon)
             
             NSString* substringForMatch = [attStr substringWithRange:NSMakeRange(startIndex, matchRange.length)];
             
-            //            NSLog(@"URL: %@",substringForMatch);
+            //                        NSLog(@"URL: %@",substringForMatch);
             
             NSString * contentStr = nil;
             NSString * replaceStr = nil;
             
             if([substringForMatch hasPrefix:@"<a"]){
                 
-                NSArray * contentArr = [substringForMatch componentsSeparatedByString:@"'"];
-                contentStr = contentArr[1];
+                NSArray * contentArr = [substringForMatch componentsSeparatedByString:@"'>"];
+                contentStr = [contentArr[0] componentsSeparatedByString:@"'"][1];
                 
-                NSString * t_str = contentArr[2];
+                NSString * t_str = contentArr[1];
                 
-                NSString * url_pre = @"[link]";
-                //                NSLog(@"url_p: %lu",(unsigned long)url_pre.length);
+                NSString * url_pre = @"[linka]";
                 
-                replaceStr = [NSString stringWithFormat:@"%@%@",url_pre,[t_str substringWithRange:NSMakeRange(1, t_str.length-5)]];
-                //[NSString stringWithFormat:@"[链接]%@",
-                
-                //                 NSLog(@"url: %lu     %@",replaceStr.length,replaceStr);
+                replaceStr = [NSString stringWithFormat:@"%@%@",url_pre,[t_str substringWithRange:NSMakeRange(0, t_str.length-4)]];
                 
                 [attString replaceCharactersInRange:NSMakeRange(startIndex, matchRange.length) withString:replaceStr];
                 
                 NSRange range = NSMakeRange(startIndex, replaceStr.length);
                 
-                [attString addAttribute:(NSString *)kCTForegroundColorAttributeName value:(id)color.CGColor range:range];
+                [attString addAttribute:(NSString *)kCTForegroundColorAttributeName value:(id)styleModel.urlColor.CGColor range:range];
                 [attString addAttribute:@"keyAttribute" value:[NSString stringWithFormat:@"H%@{%@}",contentStr,[NSValue valueWithRange:range]] range:range];
                 
                 [regularResults addObject:[NSValue valueWithRange:range]];
@@ -223,11 +219,11 @@ CGFloat RunDelegateGetTagImgWidthCallback(void *refCon)
                 
                 NSRange range = NSMakeRange(startIndex, replaceStr.length);
                 
-                [attString addAttribute:(NSString *)kCTForegroundColorAttributeName value:(id)color.CGColor range:range];
+                [attString addAttribute:(NSString *)kCTForegroundColorAttributeName value:(id)styleModel.urlColor.CGColor range:range];
                 
                 [attString addAttribute:@"keyAttribute" value:[NSString stringWithFormat:@"U%@{%@}",substringForMatch,[NSValue valueWithRange:range]] range:range];
                 
-                if(urlUnderLine){
+                if(styleModel.urlUnderLine){
                     [attString addAttribute:(NSString *)kCTUnderlineStyleAttributeName value:(id)[NSNumber numberWithInt:kCTUnderlineStyleSingle] range:range];
                 }
                 
@@ -240,12 +236,93 @@ CGFloat RunDelegateGetTagImgWidthCallback(void *refCon)
     }
 }
 
+#pragma mark - Tag
++ (void)runsTagWithAttString:(NSMutableAttributedString *)attString regularResults:(NSMutableArray *)regularResults styleModel:(CTTextStyleModel *)styleModel{
+    
+    NSMutableString * attStr = attString.mutableString;
+    NSError *error = nil;//@"[\\$#@]\\{[a-zA-Z0-9_:\\u3400-\\u9FFF]{1,20}\\}|\\[[a-zA-Z0-9_\\u3400-\\u9FFF]+\\]";
+    //[a-zA-Z0-9_:\\u3400-\\u9FFF]{1,20}
+    NSString *regulaStr = @"<tag type='[a-zA-Z0-9_]*' value='((?!<\\/tag>).)*'>((?!<\\/tag>).)*</tag>";
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:regulaStr
+                                                                           options:NSRegularExpressionCaseInsensitive
+                                                                             error:&error];
+    if (error == nil)
+    {
+        NSArray *arrayOfAllMatches = [regex matchesInString:attStr
+                                                    options:0
+                                                      range:NSMakeRange(0, [attStr length])];
+        NSInteger forIndex = 0;
+        NSInteger startIndex = -1;
+        
+        for (NSTextCheckingResult *match in arrayOfAllMatches){
+            NSRange matchRange = match.range;
+            
+            if(startIndex == -1){
+                startIndex = matchRange.location;
+            }else{
+                startIndex = matchRange.location-forIndex;
+            }
+            
+            NSString* substringForMatch = [attStr substringWithRange:NSMakeRange(startIndex, matchRange.length)];
+            
+            NSString * contentStr = nil;
+            NSString * replaceStr = nil;
+            
+            NSArray * contentArr = [substringForMatch componentsSeparatedByString:@"'>"];
+            if(contentArr.count != 2){
+                continue;
+            }
+            NSArray * contentArr0 = [contentArr[0] componentsSeparatedByString:@"'"];
+            
+            NSString * t_str = contentArr[1];
+            
+            NSString * tagType = contentArr0[1];//[contentArr[0] componentsSeparatedByString:@"'"][1];
+            
+            contentStr = contentArr0[3];
+            
+            NSString * tagName = nil;
+            
+            //这里的tagName写死了，写别的不知道为什么会给标签图片和文本之间留空格...
+            if([tagType isEqualToString:@"image"]){
+                tagName = @"[linkp]";
+            }else if ([tagType isEqualToString:@"video"]){
+                tagName = @"[linkv]";
+            }else if ([tagType isEqualToString:@"link"]){
+                tagName = @"[linka]";
+            }else{
+                continue;
+            }
+            
+            
+            replaceStr = [NSString stringWithFormat:@"%@%@",tagName,[t_str substringWithRange:NSMakeRange(0, t_str.length-6)]];
+            
+            [attString replaceCharactersInRange:NSMakeRange(startIndex, matchRange.length) withString:replaceStr];
+            
+            NSRange range = NSMakeRange(startIndex, replaceStr.length);
+            
+            [attString addAttribute:(NSString *)kCTForegroundColorAttributeName value:(id)styleModel.urlColor.CGColor range:range];
+            [attString addAttribute:@"keyAttribute" value:[NSString stringWithFormat:@"T%@{%@}",contentStr,[NSValue valueWithRange:range]] range:range];
+            
+            [regularResults addObject:[NSValue valueWithRange:range]];
+            
+            forIndex += substringForMatch.length-replaceStr.length;
+            
+            //            NSLog(@"attString: %@",attString.string);
+            
+        }
+        
+    }
+    
+}
+
 #pragma mark - Other
 + (void)runsOtherWithAttString:(NSMutableAttributedString *)attString regularResults:(NSMutableArray *)regularResults styleModel:(CTTextStyleModel *)styleModel emojis:(NSDictionary *)emojis emojisDelegate:(id)emojisDelegate{
     NSMutableString * attStr = attString.mutableString;
     
     NSError *error = nil;//@"[\\$#@]\\{[a-zA-Z0-9_:\\u3400-\\u9FFF]{1,20}\\}|\\[[a-zA-Z0-9_\\u3400-\\u9FFF]+\\]";
-    NSString *regulaStr = @"<key>[a-zA-Z0-9_:\\u3400-\\u9FFF]{1,20}<\\/key>|<sub>[a-zA-Z0-9_:\\u3400-\\u9FFF]{1,20}<\\/sub>|<at>[a-zA-Z0-9_:\\u3400-\\u9FFF]{1,20}<\\/at>|[\\$#@]\\{[a-zA-Z0-9_:\\u3400-\\u9FFF]{1,20}\\}|\\[[a-zA-Z0-9_\\u3400-\\u9FFF]+\\]";
+    //[a-zA-Z0-9_:\\u3400-\\u9FFF]{1,20}
+    //
+    NSString *regulaStr = @"<key>((?!<\\/key>).)*<\\/key>|<subject>((?!<\\/subject>).)*<\\/subject>|<at>((?!<\\/at>).)*<\\/at>|[\\$#@]\\{((?!\\}).)*\\}|\\[[a-zA-Z0-9_\\u3400-\\u9FFF]+\\]";
     NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:regulaStr
                                                                            options:NSRegularExpressionCaseInsensitive
                                                                              error:&error];
@@ -272,7 +349,6 @@ CGFloat RunDelegateGetTagImgWidthCallback(void *refCon)
             
             NSString * contentStr = nil;
             NSString * replaceStr = nil;
-            
             if([substringForMatch hasPrefix:@"<at>"]){
                 contentStr = [substringForMatch substringWithRange:NSMakeRange(4, substringForMatch.length-9)];
                 
@@ -288,20 +364,20 @@ CGFloat RunDelegateGetTagImgWidthCallback(void *refCon)
                 
                 forIndex += 8;
                 continue;
-            }else if ([substringForMatch hasPrefix:@"<sub>"]){
+            }else if ([substringForMatch hasPrefix:@"<subject>"]){
                 
-                contentStr = [substringForMatch substringWithRange:NSMakeRange(5, substringForMatch.length-11)];
+                contentStr = [substringForMatch substringWithRange:NSMakeRange(9, substringForMatch.length-19)];
                 
                 replaceStr = [NSString stringWithFormat:@"#%@#",contentStr];
                 
                 [attString replaceCharactersInRange:NSMakeRange(startIndex, matchRange.length) withString:replaceStr];
                 
-                NSRange range = NSMakeRange(startIndex, matchRange.length-9);
+                NSRange range = NSMakeRange(startIndex, matchRange.length-17);//9
                 
                 [attString addAttribute:(NSString *)kCTForegroundColorAttributeName value:(id)styleModel.subjectColor.CGColor range:range];
                 [attString addAttribute:@"keyAttribute" value:[NSString stringWithFormat:@"#%@{%@}",contentStr,[NSValue valueWithRange:range]] range:range];
                 
-                forIndex += 9;
+                forIndex += 17;//9
                 
                 continue;
             }else if ([substringForMatch hasPrefix:@"<key>"]){
@@ -452,15 +528,19 @@ CGFloat RunDelegateGetTagImgWidthCallback(void *refCon)
     //清除存储能匹配表达式规则的字符串
     [_regularResult removeAllObjects];
     
-    [CTTextRun runsRULWithAttString:attString regularResults:_regularResult urlUnderLine:_styleModel.urlUnderLine color:_styleModel.urlColor];
+    //<tag>
+    [CTTextRun runsTagWithAttString:attString regularResults:_regularResult styleModel:_styleModel];
     
-    //emojis
+    //url
+    [CTTextRun runsURLWithAttString:attString regularResults:_regularResult styleModel:_styleModel];
+    
+    //email
     [CTTextRun runsEmailWithAttString:attString regularResults:_regularResult styleModel:_styleModel];
     
-    //电话号码比较特殊，有可能是URL、Email的一部分，所以放在URL、Email后面匹配，在URL Email中把匹配表达式的字符串存起来，而在电话规则里面不用存储
+    //phone: 电话号码比较特殊，有可能是URL、Email的一部分，所以放在URL、Email后面匹配，在URL Email中把匹配表达式的字符串存起来，而在电话规则里面不用存储
     [CTTextRun runsPhoneWithAttString:attString regularResults:_regularResult styleModel:_styleModel];
     
-    //@#$...
+    //@#$<at><key><subject>..
     [CTTextRun runsOtherWithAttString:attString regularResults:_regularResult styleModel:_styleModel emojis:_emojis emojisDelegate:self];
     
 }

@@ -1,5 +1,6 @@
 # CTTextDisplayView
 
+************* 更新 2016/04/26 添加<tag type=‘’ value=‘’></tag>标签，修复正则表达式，添加视频/图片图片标签(仿sina微博) *************
 
 ************* 更新 2016/04/25 修复正则表达式，添加链接图片标签(仿sina微博) *************
 
@@ -38,4 +39,4 @@ com'>Google< /a>回http://www.3452324.com右< a href='www.baidu.com'>Baidu百度
 </pre>
 
 
-![CTTextDisplayView](https://github.com/BrownCN023/CTTextDisplayView/blob/master/ScreenShot_03.png)
+![CTTextDisplayView](https://github.com/BrownCN023/CTTextDisplayView/blob/master/ScreenShot_04.png)

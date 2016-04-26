@@ -8,7 +8,11 @@
 	<string>d_beishang.png</string>
 	<key>[鄙视]</key>
 	<string>d_bishi.png</string>
-	<key>[link]</key>
+	<key>[linka]</key>
 	<string>hyperlink.png</string>
+	<key>[linkv]</key>
+	<string>video.png</string>
+	<key>[linkp]</key>
+	<string>photo.png</string>
 </dict>
 </plist>

@@ -288,9 +288,10 @@
                 
                 CGRect keyRect = CGRectZero;
                 char firstCharAttribute = [keyAttribute characterAtIndex:0];
+                //                NSLog(@"keyAttribute:%@",keyAttribute);
                 if(firstCharAttribute == 'F'){
-                    NSArray * imageNameArr = [keyAttribute componentsSeparatedByString:@"("];
                     NSString * imageName = nil;
+                    NSArray * imageNameArr = [keyAttribute componentsSeparatedByString:@"("];
                     if(imageNameArr.count > 1){
                         imageName = imageNameArr[0];
                     }else{
@@ -299,7 +300,7 @@
                     UIImage *image = [UIImage imageNamed:imageName];
                     if (image) {
                         //runWidth, runHeight);
-                        if([keyAttribute hasPrefix:@"F:hyperlink.png"]){
+                        if([keyAttribute hasPrefix:@"F:hyperlink"] || [keyAttribute hasPrefix:@"F:video"] || [keyAttribute hasPrefix:@"F:photo"]){
                             keyRect = CGRectMake(runPointX, runPointY+(lineHeight-_styleModel.tagImgSize.height)/2.0, _styleModel.tagImgSize.width,_styleModel.tagImgSize.height);
                             prevImgRect = CGRectMake(runPointX, lineOrigin.y-(lineHeight+_styleModel.highlightBackgroundAdjustHeight-lineSpace)/4-_styleModel.highlightBackgroundOffset, _styleModel.tagImgSize.width, lineHeight+_styleModel.highlightBackgroundAdjustHeight);
                         }else{
@@ -308,18 +309,18 @@
                         CGContextDrawImage(contextRef, keyRect, image.CGImage);
                         
                     }
-                }else if(firstCharAttribute == 'H' || firstCharAttribute == 'U' || firstCharAttribute == '@' || firstCharAttribute == '#' || firstCharAttribute == '$' || firstCharAttribute == 'E' || firstCharAttribute == 'P'){
+                }else if(firstCharAttribute == 'T' || firstCharAttribute == 'H' || firstCharAttribute == 'U' || firstCharAttribute == '@' || firstCharAttribute == '#' || firstCharAttribute == '$' || firstCharAttribute == 'E' || firstCharAttribute == 'P'){
                     
                     keyRect = CGRectMake(runPointX, lineOrigin.y-(lineHeight+_styleModel.highlightBackgroundAdjustHeight-lineSpace)/4-_styleModel.highlightBackgroundOffset, runWidth, lineHeight+_styleModel.highlightBackgroundAdjustHeight);
                     
                     NSMutableArray * obj = [self.keyAttributeDict objectForKey:keyAttribute];
                     if(obj == nil){
                         obj = [NSMutableArray new];
-                        if(firstCharAttribute == 'H'){
+                        if(firstCharAttribute == 'H' || firstCharAttribute == 'T'){
                             CGFloat t_w = 0;
                             if(keyRect.origin.x == 0.0f){
                                 [obj addObject:[NSValue valueWithCGRect:prevImgRect]];
-                                //                                [self.keyAttributeDict setObject:obj forKey:keyAttribute];
+                                
                                 [self.keyRectDict setObject:keyAttribute forKey:[NSValue valueWithCGRect:prevImgRect]];
                                 
                             }else{
@@ -350,21 +351,21 @@
                     [self.keyAttributeDict setObject:obj forKey:keyAttribute];
                     [self.keyRectDict setObject:keyAttribute forKey:[NSValue valueWithCGRect:keyRect]];
                 }
-//                else{
-//                    
-//                    UIImage *image = [UIImage imageNamed:keyAttribute];
-//                    if (image) {
-//                        //runWidth, runHeight);
-//                        if([keyAttribute isEqualToString:@"hyperlink.png"]){
-//                            keyRect = CGRectMake(runPointX, runPointY+(lineHeight-_styleModel.tagImgSize.height)/2.0, _styleModel.tagImgSize.width,_styleModel.tagImgSize.height);
-//                            prevImgRect = CGRectMake(runPointX, lineOrigin.y-(lineHeight+_styleModel.highlightBackgroundAdjustHeight-lineSpace)/4-_styleModel.highlightBackgroundOffset, _styleModel.tagImgSize.width, lineHeight+_styleModel.highlightBackgroundAdjustHeight);
-//                        }else{
-//                            keyRect = CGRectMake(runPointX, runPointY, faceSize.width,faceSize.height);
-//                        }
-//                        CGContextDrawImage(contextRef, keyRect, image.CGImage);
-//                        
-//                    }
-//                }
+                //                else{
+                //
+                //                    UIImage *image = [UIImage imageNamed:keyAttribute];
+                //                    if (image) {
+                //                        //runWidth, runHeight);
+                //                        if([keyAttribute isEqualToString:@"hyperlink.png"]){
+                //                            keyRect = CGRectMake(runPointX, runPointY+(lineHeight-_styleModel.tagImgSize.height)/2.0, _styleModel.tagImgSize.width,_styleModel.tagImgSize.height);
+                //                            prevImgRect = CGRectMake(runPointX, lineOrigin.y-(lineHeight+_styleModel.highlightBackgroundAdjustHeight-lineSpace)/4-_styleModel.highlightBackgroundOffset, _styleModel.tagImgSize.width, lineHeight+_styleModel.highlightBackgroundAdjustHeight);
+                //                        }else{
+                //                            keyRect = CGRectMake(runPointX, runPointY, faceSize.width,faceSize.height);
+                //                        }
+                //                        CGContextDrawImage(contextRef, keyRect, image.CGImage);
+                //
+                //                    }
+                //                }
             }
         }
     }
@@ -442,6 +443,8 @@
                     key = @"P";
                 }else if(ch_key == 'H'){
                     key = @"U";
+                }else if(ch_key == 'T'){
+                    key = @"T";
                 }
                 
                 NSRange endRange = [((NSString *)obj) rangeOfString:@"{"];
