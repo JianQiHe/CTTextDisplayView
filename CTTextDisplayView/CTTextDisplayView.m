@@ -381,13 +381,11 @@
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     [super touchesBegan:touches withEvent:event];
+    
     _private_need_calc_height = NO;
     
     CGPoint location = [(UITouch *)[touches anyObject] locationInView:self];
     CGPoint runLocation = CGPointMake(location.x, self.frame.size.height - location.y);
-    
-    
-    
     
     [self.keyRectDict enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop){
         
@@ -415,6 +413,7 @@
 - (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
     [super touchesEnded:touches withEvent:event];
+    
     _private_need_calc_height = NO;
     
     CGPoint location = [(UITouch *)[touches anyObject] locationInView:self];
@@ -451,6 +450,7 @@
                 NSDictionary * objDict = @{@"key":key,@"value":[obj substringWithRange:NSMakeRange(1, endRange.location-1)]};
                 [_weak_self.delegate ct_textDisplayView:_weak_self obj:objDict];
             }
+            
         }
     }];
     self.currentKey = nil;

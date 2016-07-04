@@ -32,16 +32,16 @@
      * ${李四}                                    李四
      * @{张三:0012}                               @张三
      * #{过年了:0011}                             #过年了#
-     *
+     * ${李四:00013}                              李四
      */
     
-    NSString * text = @"<a href='https://xjasesffdf.jp/iji'>高中学霸</a>的体系${素质}供${素质:234}评撒人http://www.34523.com体系<tag type='link' value='www.guichuideng.com'>鬼吹灯</tag>的重<tag type='video' value='video001'>鬼吹灯</tag>要内重要内重要<tag type='image' value='photo001'>鬼吹灯</tag>容，将78356655为公高学素质供衡和指导。有条<a href='https://xjasesffdf.jp/iji'>基準に対して同</a>的科学精神了解的知识、具备的能力[悲伤][拜拜][拜拜][悲伤]<tag type='image' value='0002'>鬼吹灯</tag>[拜拜][鄙视][鄙视][鄙视][鄙视][悲伤][鄙视][鄙视][鄙视][鄙视][鄙视]每条基准下列出了相应的点<a href='https://www.erssffd.com/mo'>그래, 기준 을 위해 같은 对基准进行了进行了同위해 같은 </a>不需要。<a href='https://www.google.com'>Google</a>回http://www.3452324.com右<a href='www.baidu.com'>Baidu百度</a>复[拜拜]lkm要标准${张三} <subject>周杰伦</subject><key>李四，张三</key><at>猪八戒</at>1233回工WEcx回上张三复想人们回家78356655@qq.com[拜拜][鄙视] 0755-78356655[鄙视]#{旅游节DD}[拜拜][鄙视]13456890000四:32}And@{王麻子:12}\ue056宝https://www.google.com/贵的@时间[拜拜]视我 自鄙www.baidu.com[拜<at>想回家</at>拜[悲伤]视]横[悲伤]刀[拜拜]向天@{王麻子:12}笑[拜拜]，@{去留肝胆两昆}仑。 This is my first CoreText @{王麻子}张家#{北京奥运会}界旅游#{周杰伦:23}[拜拜]独往来[拜拜]独往来[鄙视]独往来[悲伤]。";
+    NSString * text = @"<a href='https://xjasesffdf.jp/iji'>高中学霸</a>的体系${素质}供${素质:234}评撒人http://www.34523.com体系<tag type='link' value='www.guichuideng.com'>鬼吹灯</tag>的重<tag type='video' value='video001'>鬼吹灯</tag>要内重要内重要<tag type='image' value='photo001'>鬼吹灯</tag>容，将78356655为公高学素质供衡和指导。有条<a href='https://xjasesffdf.jp/iji'>基準に対して同</a>的科学精神了解的知识、具备的能力[悲伤][拜拜][拜拜][悲伤]<tag type='image' value='0002'>鬼吹灯</tag>[拜拜][鄙视][鄙视][鄙视][鄙视][悲伤][鄙视][鄙视][鄙视][鄙视][鄙视]每条基准下列出了相应的点<a href='https://www.erssffd.com/mo'>그래, 기준 을 위해 같은 对基准进行了进行了同위해 같은 </a>不需要。<a href='https://www.google.com'>Google</a>回http://www.3452324.com右<a href='www.baidu.com'>Baidu百度</a>复[拜拜]lkm要标准${张三} <subject>周杰伦</subject><key>李四，张三</key><at>猪八戒</at>1233回工WEcx回上张三复想人们回家78356655@qq.com[拜拜][鄙视] 0755-78356655[鄙视]#{旅游节DD}[拜拜][鄙视]13456890000四:32}And@{王麻子:12}\ue056宝贵的@时间[拜拜]视我 自鄙[拜<at>想回家</at>拜[悲伤]视]横[悲伤]刀[拜拜]向天@{王麻子:12}笑[拜拜]，@{去留肝胆两昆}仑。@{王麻子}张家#{北京奥运会}界旅游#{周杰伦:23}[拜拜]独往来[拜拜]独往来[鄙视]独往来[悲伤]。";
     
     CTTextStyleModel * styleModel = [CTTextStyleModel new];
-    styleModel.font = [UIFont systemFontOfSize:16];//[UIFont fontWithName:@"Menlo-Regular" size:25];//[UIFont systemFontOfSize:25];
+    styleModel.font = [UIFont systemFontOfSize:17];//[UIFont fontWithName:@"Menlo-Regular" size:25];//[UIFont systemFontOfSize:25];
     styleModel.faceSize = CGSizeMake(22, 22);
     styleModel.tagImgSize = CGSizeMake(14, 14);
-    styleModel.faceOffset = 6;
+    styleModel.faceOffset = 5;
     styleModel.lineSpace = 4.0f;
     styleModel.numberOfLines = -1;
     styleModel.highlightBackgroundRadius = 4;//10;
